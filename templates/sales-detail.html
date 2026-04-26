@@ -1,0 +1,26 @@
+<table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
+    <thead>
+        <tr>
+            <th style="background: #F5F5F5; padding: 12px; text-align: left; border-bottom: 1px solid #E0E0E0; color: #000000; font-weight: 600;">商品名</th>
+            <th style="background: #F5F5F5; padding: 12px; text-align: right; border-bottom: 1px solid #E0E0E0; color: #000000; font-weight: 600;">数量</th>
+            <th style="background: #F5F5F5; padding: 12px; text-align: right; border-bottom: 1px solid #E0E0E0; color: #000000; font-weight: 600;">単価</th>
+            <th style="background: #F5F5F5; padding: 12px; text-align: right; border-bottom: 1px solid #E0E0E0; color: #000000; font-weight: 600;">小計</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in sale.items %}
+        <tr>
+            <td style="padding: 12px; border-bottom: 1px solid #E0E0E0;">{{ item.product_name }}</td>
+            <td style="padding: 12px; text-align: right; border-bottom: 1px solid #E0E0E0;">{{ item.quantity }}</td>
+            <td style="padding: 12px; text-align: right; border-bottom: 1px solid #E0E0E0;">{{ item.sale_price }}円</td>
+            <td style="padding: 12px; text-align: right; border-bottom: 1px solid #E0E0E0;">{{ item.subtotal }}円</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3" style="padding: 16px 12px; text-align: right; font-weight: 600; border-top: 2px solid #000000; color: #000000;">合計</td>
+            <td style="padding: 16px 12px; text-align: right; font-weight: 600; border-top: 2px solid #000000; color: #000000;">{{ sale.total_amount }}円</td>
+        </tr>
+    </tfoot>
+</table>
