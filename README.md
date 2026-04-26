@@ -404,6 +404,134 @@ cargo run
 | `/api/ranking` | GET | 売上ランキング (JSON) |
 | `/api/category-summary` | GET | カテゴリ別集計 (JSON) |
 
+## API レスポンス例
+
+### GET /api/products
+商品一覧を取得
+```json
+[
+  {
+    "id": 1,
+    "name": "Rustプログラミング",
+    "description": "Rust言語の入門書",
+    "price": 3000,
+    "stock": 50,
+    "published_date": "2024-01-15"
+  },
+  {
+    "id": 2,
+    "name": "実践Rust入門",
+    "description": "Rustの実践的な使い方",
+    "price": 3500,
+    "stock": 30,
+    "published_date": "2024-02-20"
+  }
+]
+```
+
+### GET /api/customers
+顧客一覧を取得
+```json
+[
+  {
+    "id": 1,
+    "name": "山田太郎",
+    "email": "yamada@example.com",
+    "member_number": "M001"
+  },
+  {
+    "id": 2,
+    "name": "鈴木花子",
+    "email": "suzuki@example.com",
+    "member_number": "M002"
+  }
+]
+```
+
+### GET /api/sales
+販売一覧を取得（ヘッダーー明細構造）
+```json
+[
+  {
+    "id": 1,
+    "customer_id": 1,
+    "customer_name": "山田太郎",
+    "sale_date": "2024-03-15",
+    "items": [
+      {
+        "product_id": 1,
+        "product_name": "Rustプログラミング",
+        "quantity": 2,
+        "sale_price": 3000,
+        "subtotal": 6000
+      },
+      {
+        "product_id": 2,
+        "product_name": "実践Rust入門",
+        "quantity": 1,
+        "sale_price": 3500,
+        "subtotal": 3500
+      }
+    ]
+  }
+]
+```
+
+### GET /api/ranking
+売上ランキングを取得
+```json
+[
+  {
+    "rank": 1,
+    "product_id": 1,
+    "product_name": "Rustプログラミング",
+    "total_amount": 6000,
+    "total_quantity": 2,
+    "sale_count": 1
+  },
+  {
+    "rank": 2,
+    "product_id": 5,
+    "product_name": "データベース設計",
+    "total_amount": 7500,
+    "total_quantity": 3,
+    "sale_count": 1
+  }
+]
+```
+
+### GET /api/category-summary
+カテゴリ別集計を取得
+```json
+[
+  {
+    "category_id": 1,
+    "category_name": "小説",
+    "total_amount": 0,
+    "product_count": 0,
+    "products": []
+  },
+  {
+    "category_id": 5,
+    "category_name": "教育・参考書",
+    "total_amount": 9500,
+    "product_count": 2,
+    "products": [
+      {
+        "product_id": 1,
+        "product_name": "Rustプログラミング",
+        "total_amount": 6000
+      },
+      {
+        "product_id": 2,
+        "product_name": "実践Rust入門",
+        "total_amount": 3500
+      }
+    ]
+  }
+]
+```
+
 ## デザイン
 
 白黒モノクロームのミニマルデザインを採用。洗練されたプレミアムな雰囲気で、データが見やすく整理されています。
